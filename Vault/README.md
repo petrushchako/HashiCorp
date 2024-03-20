@@ -1,6 +1,11 @@
 # HashiCorp Vault
 HashiCorp Vault is a tool used to store, process, and manage any kind of credentials. It replaces traditional databases for user credentials.
 
+### Contact details
+|||
+|---|---|
+|Slack Live Chat| `@ Erman Kreponic`|
+|E-mail| `ermin.kreponic@acloud.guru`|
 
 ### About the course
 HashiCorp Vault is a tool that is used to store, process, and generally manage any kind of credentials. It removes the need for traditional databases that are used to store user credentials. Even though it provides storage for credentials, it also provides many more features. You are able to create and revoke secrets, grant time-based access, IP-based access, and much more. <br><br>
