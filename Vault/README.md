@@ -1,13 +1,87 @@
 # HashiCorp Vault
 HashiCorp Vault is a tool used to store, process, and manage any kind of credentials. It replaces traditional databases for user credentials.
 
+
 ### About the course
-HashiCorp Vault is a tool that is used to store, process, and generally manage any kind of credentials. It removes the need for traditional databases that are used to store user credentials. Even though it provides storage for credentials, it also provides many more features. You are able to create and revoke secrets, grant time-based access, IP-based access, and much more.
-
-As part of this course, we will get acquainted with HashiCorp Vault and its features. We will see and examine the life cycle of a secret: How is it created? Where does it exist? Of what type is it? For AWS, GCP, Azure? HashiCorp Vault has specific predefined types of secrets that work well with existing cloud service providers.
-
-Vault provides you with the ability to clearly and precisely define who can access which secret and what sort of access they will have. Do you want the user to only be able to read the credentials, or can the user update them? All of these actions can be logged, and you will be able to see who accessed what and when at all times.
-
-The course will begin with a light introduction to HashiCorp Vault, taking a look at the high-level architecture and then progressing slowly over to basic command-level interaction. Once we learn how to install, configure, and interact with the tool, we will move on to performing specific tasks and reviewing real world scenarios.
-
+HashiCorp Vault is a tool that is used to store, process, and generally manage any kind of credentials. It removes the need for traditional databases that are used to store user credentials. Even though it provides storage for credentials, it also provides many more features. You are able to create and revoke secrets, grant time-based access, IP-based access, and much more. <br><br>
+As part of this course, we will get acquainted with HashiCorp Vault and its features. We will see and examine the life cycle of a secret: How is it created? Where does it exist? Of what type is it? For AWS, GCP, Azure? HashiCorp Vault has specific predefined types of secrets that work well with existing cloud service providers.<br><br>
+Vault provides you with the ability to clearly and precisely define who can access which secret and what sort of access they will have. Do you want the user to only be able to read the credentials, or can the user update them? All of these actions can be logged, and you will be able to see who accessed what and when at all times.<br><br>
+The course will begin with a light introduction to HashiCorp Vault, taking a look at the high-level architecture and then progressing slowly over to basic command-level interaction. Once we learn how to install, configure, and interact with the tool, we will move on to performing specific tasks and reviewing real world scenarios.<br><br>
 It would be impossible to demonstrate all the possible scenarios, but the most common ones will be included such as configuring Vault to work with SSH and provide access, setting up Vault to work with GCP and create GCP-type secrets, and setting up Vault to work with MySQL databases. There will also be an opportunity to analyze how Vault can be easily integrated into third-party custom applications for which there are no specific types of secrets.
+
+<br>
+
+## Course Outline
+
+### General Overview
+- What Is HashiCorp Vault?
+- What Problems Does HashiCorp Vault Solve and Where Is It Used?
+- Overview of High Level Architecture
+
+### Install HashiCorp Vault and Configure HashiCorp Vault Shell
+- Installing HashiCorp Vault on Linux Part 1
+- Installing HashiCorp Vault on Linux Part 2
+- Installing HashiCorp Vault on Linux Part 3
+- Installing HashiCorp Vault on Linux Part 4
+- Installing HashiCorp Vault on Windows (This will be demonstrated but not used)
+- `HANDS-ON LAB` Install and Configure HashiCorp Vault on Linux
+
+### HashiCorp Vault Web-Based User Interface
+- Overview of HashiCorp Vault Web UI
+
+### HashiCorp Vault Authentication, Secrets, and Tokens
+- Overview and Usage of HashiCorp Vault Secrets Engine
+- Write, Get, and Delete a Secret
+- Overview and Usage of Dynamic Secrets GCP - Part 1
+- Overview and Usage of Dynamic Secrets GCP - Part 2
+- Authentication and Tokens
+- Username and Password Authentication
+- GitHub Authentication
+- `HANDS-ON LAB` Configure Authentication with HashiCorp Vault
+
+### HashiCorp Vault Policies
+- Overview of Policy Formats
+- Writing and Testing Sentinel Policies
+- Writing and Testing ACL Policies Example 1
+- Writing and Testing ACL Policies Example 2
+- `HANDS-ON LAB` Write and Test a HashiCorp Vault Policy
+
+### Overview of HashiCorp Vault Application Programming Interface - API
+- Using HashiCorp Vault REST API Part 1
+- Using HashiCorp Vault REST API Part 2
+- `HANDS-ON LAB` Configure and Test HashiCorp Vault REST API
+
+### Secure Shell Authentication with HashiCorp Vault
+- Authenticate to SSH via HashiCorp Vault Part 1
+- Authenticate to SSH via HashiCorp Vault Part 2
+- Authenticate to SSH via HashiCorp Vault Part 3
+- `HANDS-ON LAB` Configure SSH for HashiCorp Vault Authentication
+
+### Creating Logs and Managing Logging
+- Configure and Test Logging for HashiCorp Vault Part 1 - Server Logs
+- Configure and Test Logging for HashiCorp Vault Part 2 - File Logs
+- Configure and Test Logging for HashiCorp Vault Part 3 - rsync
+- `HANDS-ON LAB` Implement a Logging Solution for HashiCorp Vault
+
+### Authenticate a User to a Website via Vault
+- HashiCorp Vault Website User Authentication Part 1
+- HashiCorp Vault Website User Authentication Part 2
+- HashiCorp Vault Website User Authentication Part 3
+- `HANDS-ON LAB` Integrating HashiCorp Vault Authentication to a Website
+
+### Authenticate to Application API via Vault
+- Authenticate to Application REST API via HashiCorp Vault Part 1
+- Authenticate to Application REST API via HashiCorp Vault Part 2
+- Authenticate to Application REST API via HashiCorp Vault Part 3
+- `HANDS-ON LAB` Implement HashiCorp Vault API Authentication
+
+### Database Authentication via HashiCorp Vault
+- Configure HashiCorp Vault Authentication to a MariaDB Part 1
+- Configure HashiCorp Vault Authentication to a MariaDB Part 2
+- Configure HashiCorp Vault Authentication to a MariaDB Part 3
+- `HANDS-ON LAB` Implement HashiCorp Vault Authentication to MariaDB
+
+### Authenticate an IAM User via Vault
+- IAM User Authentication with HashiCorp Vault Part 1
+- IAM User Authentication with HashiCorp Vault Part 2
+- IAM User Authentication with HashiCorp Vault Part 3
