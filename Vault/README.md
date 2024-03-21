@@ -21,7 +21,7 @@ It would be impossible to demonstrate all the possible scenarios, but the most c
 ### General Overview
 - What Is HashiCorp Vault?
 - What Problems Does HashiCorp Vault Solve and Where Is It Used?
-- Overview of High Level Architecture
+- Overview of High-Level Architecture
 
 ### Install HashiCorp Vault and Configure HashiCorp Vault Shell
 - Installing HashiCorp Vault on Linux Part 1
@@ -183,3 +183,44 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
 - **Syslogs**
 
     Integration with syslog enables centralized logging of Vault's activity for monitoring and analysis.
+
+
+<br><br>
+
+## Install HashiCorp Vault and Configure HashiCorp Vault Shell<br><br> Installing HashiCorp Vault on Linux
+
+### Part 1 (Consul installation)
+- Download Consul
+
+    `wget https://releases.hashicorp.com/consul/1.7.3/consul_1.7.3_linux_amd64.zip`
+
+- Unpack Consul
+
+    `unzip conosul_1.7.3_linux_amd64.zip`
+
+- Change the file location
+
+    `sudo mv consul /usr/bin/`
+
+- Run test to verify that it works
+
+    `consul --version`
+
+### Part 2 
+- Consul systemd file
+
+
+
+- Configuration files
+
+
+
+- Configuration for UI
+
+
+
+- Confirm and test out systemd configuration
+
+
+
+
