@@ -115,3 +115,11 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
 - **Integration with Cloud Platforms:** <br>Vault seamlessly integrates with popular cloud platforms, container orchestration systems, and identity providers, allowing organizations to leverage its capabilities in diverse environments.
 
 - **High Availability:** <br>Vault supports high availability configurations, ensuring continuous access to secrets and minimizing downtime in mission-critical environments.
+
+
+<br>
+
+### Additional Resources
+- **HashiCorp Vault website** <br> https://www.vaultproject.io
+- **Official Documentation** <br> https://www.vaultproject.io/docs
+- **Non-Enterprise vs Enterprise** <br> https://www.hashicorp.com/products/vault/pricing
