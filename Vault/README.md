@@ -150,3 +150,36 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
 - **Infrastructure Automation and Orchestration**<br> Vault integrates with infrastructure automation and orchestration tools such as Terraform, Kubernetes, and Ansible, enabling automated provisioning, configuration, and management of secrets and infrastructure resources.
 
 - **Zero Trust Security**<br> Vault aligns with zero trust security principles by enforcing strict access controls, minimizing the exposure of secrets, and dynamically generating and revoking access credentials based on policies and authentication factors.
+
+<br>
+
+### Overview of High-Level Architecture
+
+![](img/architecture.png)
+
+- **Auth**
+
+    Vault supports various authentication methods to verify users and services before granting access.
+    Examples of authentication methods include token-based authentication, username/password authentication, LDAP, Active Directory, AWS IAM, Kubernetes, and more.
+
+- **Database & Consul**
+
+    Vault can integrate with databases for data storage and utilize Consul for distributed storage and service discovery.
+    Vault can leverage databases (such as PostgreSQL, MySQL, or MongoDB) to store its data, including secrets, encryption keys, and audit logs.
+    Consul, another product by HashiCorp, can serve as a highly available and distributed storage backend for Vault, providing scalability, fault tolerance, and dynamic service discovery.
+
+- **Storage**
+
+    Vault employs different storage backends for persistent data storage, offering flexibility based on requirements. Vault supports various storage backends, including Consul, etcd, Amazon DynamoDB, Google Cloud Storage (GCS), and more.
+
+- **CORE**
+
+    The core components of Vault handle critical functions such as secrets management, access control, and encryption.
+
+- **Audit**
+
+    Vault provides audit logging to record important events for compliance and security purposes. Vault can log audit events to various destinations, including local files, syslog, standard output, and external logging services such as Splunk, Elasticsearch, or AWS CloudWatch.
+
+- **Syslogs**
+
+    Integration with syslog enables centralized logging of Vault's activity for monitoring and analysis.
