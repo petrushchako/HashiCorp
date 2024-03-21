@@ -209,18 +209,61 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
 ### Part 2 
 - Consul systemd file
 
-
+    `sudo vim /etc/systemd/system/consul.service`
 
 - Configuration files
 
-
+    ```ini
+    [Unit]
+    Description=Consul
+    Documentation=https://www.consul.io/
+    [Service]
+    ExecStart=/usr/bin/consul agent -server -ui -data-dir=/temp/consul -bootstrap-expect=1 -node=vault -bind=IP.ADDRESS.OF.SERVER -config-dir=/etc/consul.d/
+    ExecReload=/bin/kill -HUP $MAINPID
+    LimitNOFILE=65536
+    [Install]
+    WantedBy=multi-user.target
+    ```
+    > ***Note:***<br> In the lab `-bind=IP.ADDRESS.OF.SERVER` was set to `-bind=172.31.109.145`
 
 - Configuration for UI
 
+    ```shell
+    sudo mkdir /etc/consul.d
+    sudo vim /etc/consul.d/ui.json
+    ```
+
+    `ui.json`
+    ```json
+    {
+        "address": {
+            "http": "0.0.0.0"
+        }
+    }
+    ```
 
 
 - Confirm and test out systemd configuration
 
+    Restart daemon
+
+    `sudo systemctl daemon-reload`
+
+    Check status
+    
+    `sudo systemctl status consul`
+
+    Start consul
+    
+    `sudo sytemctl start consul`
+
+    Enable Consul
+    
+    `sudo systemctl enable consul`
+
+    Check Consul logs
+
+    `sudo journalctl -f -u consul`
 
 
 
