@@ -90,3 +90,28 @@ It would be impossible to demonstrate all the possible scenarios, but the most c
 - IAM User Authentication with HashiCorp Vault Part 1
 - IAM User Authentication with HashiCorp Vault Part 2
 - IAM User Authentication with HashiCorp Vault Part 3
+
+
+<br><br><br>
+
+## What is HashiCorp Vault
+
+HashiCorp Vault is a popular open-source tool designed for securely storing, managing, and controlling access to sensitive data and secrets in modern computing environments. It provides a centralized platform for managing secrets such as passwords, API keys, encryption keys, and certificates, ensuring their secure storage, access, and dynamic rotation.
+
+**Key features of HashiCorp Vault include:**
+
+- **Secret Management:** <br>Vault enables organizations to securely store and manage sensitive data and secrets in a centralized repository, reducing the risk of exposure and unauthorized access.
+
+- **Dynamic Secrets:** <br>It allows for the dynamic generation of secrets on-demand, providing a higher level of security by limiting the lifespan and scope of access for secrets.
+
+- **Encryption as a Service:** <br>Vault provides encryption and decryption services, allowing applications to encrypt and decrypt data securely without directly handling encryption keys.
+
+- **Access Control Policies:** <br>Vault offers fine-grained access control mechanisms through policies, allowing administrators to define who can access which secrets and under what conditions.
+
+- **Secret Rotation:** <br>Vault supports automatic and manual rotation of secrets, ensuring that cryptographic keys and other sensitive data are regularly updated to mitigate security risks.
+
+- **Auditing and Logging:** <br>Vault logs all access and operations, providing a detailed audit trail for compliance and troubleshooting purposes.
+
+- **Integration with Cloud Platforms:** <br>Vault seamlessly integrates with popular cloud platforms, container orchestration systems, and identity providers, allowing organizations to leverage its capabilities in diverse environments.
+
+- **High Availability:** <br>Vault supports high availability configurations, ensuring continuous access to secrets and minimizing downtime in mission-critical environments.
