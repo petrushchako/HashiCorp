@@ -190,28 +190,28 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
 ## Install HashiCorp Vault and Configure HashiCorp Vault Shell<br><br> Installing HashiCorp Vault on Linux
 
 ### Part 1 (Consul installation)
-- Download Consul
+- **Download Consul**
 
     `wget https://releases.hashicorp.com/consul/1.7.3/consul_1.7.3_linux_amd64.zip`
 
-- Unpack Consul
+- **Unpack Consul**
 
     `unzip conosul_1.7.3_linux_amd64.zip`
 
-- Change the file location
+- **Change the file location**
 
     `sudo mv consul /usr/bin/`
 
-- Run test to verify that it works
+- **Run test to verify that it works**
 
     `consul --version`
 
-### Part 2 
-- Consul systemd file
+### Part 2 (Consul configuration)
+- **Consul systemd file**
 
     `sudo vim /etc/systemd/system/consul.service`
 
-- Configuration files
+- **Configuration files**
 
     ```ini
     [Unit]
@@ -226,7 +226,7 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
     ```
     > ***Note:***<br> In the lab `-bind=IP.ADDRESS.OF.SERVER` was set to `-bind=172.31.109.145`
 
-- Configuration for UI
+- **Configuration for UI**
 
     ```shell
     sudo mkdir /etc/consul.d
@@ -243,7 +243,7 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
     ```
 
 
-- Confirm and test out systemd configuration
+- **Confirm and test out systemd configuration**
 
     Restart daemon
 
