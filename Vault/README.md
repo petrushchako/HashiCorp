@@ -279,15 +279,7 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
 
     sudo certbot certonly --standalone -d alex.mylabserver.com
     ```
-
-- **LetsEncrypt**
-
+    > Note: <br>Record the path where certificate has been saved
 
 
-- **Certbot**
-
-
-
-
-- **Domain**
 
