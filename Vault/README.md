@@ -369,4 +369,8 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
     > sudo systemctl start vault
     > ```
 
+- **Useal Vault**
 
+    `vault operator unseal <key_value>`
+
+    > Repeat 3 times to unsela the Vault. <br> Make sure to use different key every time calling unseal command.
