@@ -348,4 +348,20 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
 
 - Test it out!
 
+    **START VAULT**
+    ```sh
+    sudo systemctl start vault
+    sudo systemctl status vault
+    sudo systemctl enable vault
+    
+    vault operator init
+    ```
+
+    > **RESET configuration**<br><br>
+    > ```sh
+    > sudo systemctl stop vault
+    > consul kv delete -rescurse vault/
+    > sudo systemctl start vault
+    > ```
+
 
