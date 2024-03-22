@@ -295,10 +295,52 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
 
 - Finalize the installation procedure
 
+    ```sh
+    sudo mkdir /etc/vault
+    sudo vim /etc/vault/config.hcl
+    ```
+
+    ```json
+    storage "consul" {
+        address = "127.0.0.1:8500"
+        path = "vault/"
+    }
+    listener "tcp" {
+        address = "0.0.0.0:443"
+        tls_disable = 0
+        tls_cert_file = "/etc/letsencrypt/live/alex.mylabserver.com/fullchain.pem" 
+        tls_key_file = "/etc/letsencrypt/live/alex.mylabserver.com/privkey.pem"
+    }
+    ui = true
+    ```
+
+
+
+    `sudo vim /etc/systemd/system/vault.service`
+
+    ```ini
+    [Unit]
+    Description=Vault
+    Documentation=https://www.vault.io/
+
+    [Service]
+    ExecStart=/usr/bin/vault server -config=/etc/vault/config.hcl
+    ExecReload=/bin/hill -HUP $MAINPID
+    LimitNOFILE=65636
+
+    [Install]
+    WantedBy=multi-user.target
+    ```
+
+    ```sh
+    sudo daemon-reload
+    export VAULT_ADDR="https://alex.mylabserver.com:443"
+    ```
 
 
 - Command autocomplete 
 
+    
 
 
 - Test it out!
