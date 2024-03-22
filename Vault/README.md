@@ -335,12 +335,15 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
     ```sh
     sudo daemon-reload
     export VAULT_ADDR="https://alex.mylabserver.com:443"
+    echo "export VAULT_ADDR=https://alex.mylabserver.com:443" >> ~/.bashrc
     ```
-
 
 - Command autocomplete 
 
-    
+    ```sh
+    vault -autocomplete-install
+    complete -c /usr/bin/vault vault
+    ```
 
 
 - Test it out!
