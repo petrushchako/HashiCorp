@@ -265,5 +265,29 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
 
     `sudo journalctl -f -u consul`
 
+### Part 3
 
+- **Certificate**
+
+    ```sh
+    sudo apt-get update
+    sudo apt-get install software-properties-common
+    sudo apt-get-repository universe
+    sudo apt-get update
+
+    sudo apt-get install certbot
+
+    sudo certbot certonly --standalone -d alex.mylabserver.com
+    ```
+
+- **LetsEncrypt**
+
+
+
+- **Certbot**
+
+
+
+
+- **Domain**
 
