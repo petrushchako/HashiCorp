@@ -285,7 +285,13 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
 ### Part 4
 - Download HashiCorp Vault binary
 
-    `wget https://releases.hashicorp.com/vault/1.5.0/vault_1.5.0_linux_amd64.zip`
+    - `wget https://releases.hashicorp.com/vault/1.5.0/vault_1.5.0_linux_amd64.zip`
+
+    - Unzip:<br>
+    `unzip vault_1.5.0_linux_amd64.zip`
+
+    - Move to `usr/bin`<br>
+      `sudo mv vault /usr/bin/`
 
 - Finalize the installation procedure
 
