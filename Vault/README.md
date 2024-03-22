@@ -354,10 +354,15 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
     sudo systemctl status vault
     sudo systemctl enable vault
     
+    # Initialize Vault
     vault operator init
     ```
 
-    > **RESET configuration**<br><br>
+    >**Note:**<br> After initialization, you will be presented with 5 keys and root token. **MAKE SURE TO SAVE THEM**.<br>Vault does not store the genrated master key. Without at least  keys to reconstruct the master key, Vault will remain permanently sealed!
+
+    <br><br>
+
+    > **RESET configuration:**<br><br>
     > ```sh
     > sudo systemctl stop vault
     > consul kv delete -rescurse vault/
