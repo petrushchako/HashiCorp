@@ -421,4 +421,18 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
 - Unsel Vault by selecting `Continue to Unseal`
   - Insert 3 out of 5 keys
 - Once unsealed you will be asked to select authentication method.<br>You can reuse `root_token` from downloaded keys JSON file with `Token` authorization type.
-- 
+
+<br>
+
+**Task Scheduler entry**
+To start Vaut with Windows do the following:
+- Go to `Task Scheduler`
+- Select `Create Basic Tasks`
+  - **Name**<br> (arbitrary) `Hashicorp Vault`
+  - **Trigger**<br>`When the computer starts`
+  - **Action**<br>`Start a program`
+    - **Path**<br>`C:\Program Files\HashiCorp\vault\vault.exe`
+    - **Arguments**<br>`server -config="C:\Program Files\HashiCorp\vault\config\config.hcl"`
+- Save and Test the task created by triggering the `> Run` in Task Scheduler.
+  
+<br><br><br>
