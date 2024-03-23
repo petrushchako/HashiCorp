@@ -406,3 +406,19 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
     ui = true
     disable_mlock = true
     ```
+
+- Add User/System `Path` variable in environment variables: 
+    `C:\Program Files\HashiCorp\vault`
+
+- Start PowerShell as administrator and run the following command:
+    `vault server -config="C:\Program Files\HashiCorp\vault\config\config.hcl"`
+
+- After initializing Vault with command above, copy the URL from web ui access and navigate to browser of your choice to complete the configuration
+
+     ![](img/VaultWinInit.png)
+
+- Download Keys
+- Unsel Vault by selecting `Continue to Unseal`
+  - Insert 3 out of 5 keys
+- Once unsealed you will be asked to select authentication method.<br>You can reuse `root_token` from downloaded keys JSON file with `Token` authorization type.
+- 
