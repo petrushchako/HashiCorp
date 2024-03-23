@@ -374,3 +374,35 @@ HashiCorp Vault is a popular open-source tool designed for securely storing, man
     `vault operator unseal <key_value>`
 
     > Repeat 3 times to unsela the Vault. <br> Make sure to use different key every time calling unseal command.
+
+
+<br><br><br>
+
+## Installing HashiCorp Vault on Windows
+
+- Go to Vault website:
+  
+    `https://releases.hashicorp.com/vault/`
+
+- Download release version for Windows:
+
+    `vault_1.5.0_windows_and64.zip`
+
+- Extract `vault.exe` file from archive
+- In `Program Files` create `HashiCorp\vault` folder
+- Move `vault.exe` to `C:\Program Files\HashiCorp\vault`
+- Inside `vault` folders `config`, `data` and `log`
+
+- Create `config.hcl` configuration file and save it in `vault/config` folder.
+    ```ini
+    storage "file" {
+        path = ""C:/Program Files/HashiCorp/vault/data""
+    }
+    listener "tcp" {
+        address = "0.0.0.0:8200"
+        tls_disable = 1
+    }
+    api_addr = "http://<Machine's IP address>:8200"
+    ui = true
+    disable_mlock = true
+    ```
