@@ -330,7 +330,10 @@ The Terraform workflow involves three primary phases: writing code, reviewing ch
 
    - Confirm the apply action to deploy the infrastructure.
 
-#### Conclusion
-Following this workflow, whether individually or as part of a team, ensures efficient and effective infrastructure management. Subsequent lessons and labs will map specific Terraform commands to each phase of this workflow for practical application.
 
-Thank you for following this lesson on the Terraform workflow.
+
+
+
+<br>
+
+###
