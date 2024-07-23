@@ -85,7 +85,7 @@
 <br><hr><br>
 
 
-## Chapter 2
+## Chapter 2<br>Understanding Infrastructure As Code
 
 ### laC and Its Benefits
 Infrastructure as Code (IaC) is a key DevOps practice that involves managing and provisioning computing infrastructure through machine-readable definition files, rather than through physical hardware configuration or interactive configuration tools. It allows for the automation of infrastructure setup, configuration, and management processes, leading to more efficient, consistent, and scalable operations.
@@ -264,3 +264,73 @@ Terraform’s cloud-agnostic approach is made possible by its use of provider pl
 <br><br>
 
 
+## Chapter 3 <br>IaC with Terraform
+### Terraform Workflow
+
+#### Overview
+The Terraform workflow involves three primary phases: writing code, reviewing changes, and executing the code to deploy infrastructure. This structured approach ensures efficient and reliable infrastructure management.
+
+#### Workflow Phases
+
+1. **Write Phase**:
+   - **Objective**: Develop the initial Terraform configuration.
+   - **Best Practices**:
+     - **Version Control**: Use a version control system (e.g., Git) to manage your Terraform code. This facilitates collaboration and iterative improvements.
+     - **Flat Files**: For individual work, you might start with flat files, but version control is still recommended for tracking changes.
+
+2. **Plan Phase**:
+   - **Objective**: Review the changes that the Terraform configuration will make.
+   - **Details**:
+     - Run the `terraform plan` command to see a detailed preview of the changes Terraform will apply.
+     - This step allows you to verify the planned changes and ensure they align with your expectations.
+     - Modify the code based on the plan output to perfect your configuration.
+
+3. **Apply Phase**:
+   - **Objective**: Execute the Terraform configuration to deploy infrastructure.
+   - **Details**:
+     - Run the `terraform apply` command to apply the changes and create real resources in the cloud.
+     - This step makes actual changes to the environment, deploying the specified infrastructure.
+
+#### Workflow Summary
+- **Write**: Develop Terraform configurations using best practices such as version control.
+- **Plan**: Preview and review the changes to be made by Terraform without deploying them.
+- **Apply**: Execute the configuration to create and manage infrastructure.
+
+#### Example Workflow
+
+1. **Write Code**:
+   - Develop Terraform configuration files (`*.tf`).
+
+   ```hcl
+   provider "aws" {
+     region = "us-west-2"
+   }
+
+   resource "aws_instance" "example" {
+     ami           = "ami-0c55b159cbfafe1f0"
+     instance_type = "t2.micro"
+   }
+   ```
+
+2. **Plan Changes**:
+   - Run `terraform plan` to see the planned changes.
+
+   ```shell
+   $ terraform plan
+   ```
+
+   - Review the output to understand what resources will be created, modified, or destroyed.
+
+3. **Apply Changes**:
+   - Run `terraform apply` to apply the configuration.
+
+   ```shell
+   $ terraform apply
+   ```
+
+   - Confirm the apply action to deploy the infrastructure.
+
+#### Conclusion
+Following this workflow, whether individually or as part of a team, ensures efficient and effective infrastructure management. Subsequent lessons and labs will map specific Terraform commands to each phase of this workflow for practical application.
+
+Thank you for following this lesson on the Terraform workflow.
