@@ -409,3 +409,100 @@ $ terraform init
 #### Conclusion
 
 `terraform init` is a critical step in the Terraform workflow, preparing your working directory by downloading necessary providers and modules, and configuring the backend for state management. It ensures that your Terraform environment is ready for further actions, such as planning and applying configurations. Understanding and properly utilizing `terraform init` is essential for effective Terraform project management.
+
+
+
+
+<br>
+
+
+### Terraform Key Concepts: Plan, Apply and Destroy
+
+
+#### Overview
+
+Terraform's core workflow revolves around three key commands: `plan`, `apply`, and `destroy`. These commands are essential for managing the lifecycle of infrastructure as code (IaC) using Terraform.
+
+#### Terraform Core Workflow
+
+![](img/plan-apply-destroy.png)
+
+1. **Write Phase**:
+   - Develop the initial Terraform configuration code.
+
+2. **Plan Phase**:
+   - Use `terraform plan` to review the changes that the code will make.
+   - Iterate between writing and planning to refine and perfect the configuration.
+
+3. **Apply Phase**:
+   - Execute the code with `terraform apply` to deploy the actual infrastructure.
+
+#### Key Commands
+
+1. **terraform plan**
+
+   **Description**:
+   - Generates an execution plan, showing what actions Terraform will take to achieve the desired state defined in the configuration files.
+   - This command is read-only and makes no changes to the actual environment.
+
+   **Functionality**:
+   - Validates the configuration and prepares the execution plan.
+   - Authenticates with the credentials of the target platform.
+   - Allows users to review the planned actions before any resources are created, modified, or destroyed.
+
+   **Usage**:
+   ```shell
+   $ terraform plan
+   ```
+
+   **Benefits**:
+   - Enables both individuals and teams to review and vet the planned changes.
+   - Helps identify and prevent unforeseen resource deployments.
+
+2. **terraform apply**
+
+   **Description**:
+   - Executes the actions proposed in the plan, applying the configuration to deploy infrastructure.
+
+   **Functionality**:
+   - Creates, updates, and deletes resources as specified in the Terraform configuration.
+   - Updates the Terraform state file (`terraform.tfstate`), which tracks the current state of the managed infrastructure.
+
+   **Usage**:
+   ```shell
+   $ terraform apply
+   ```
+
+   **State File**:
+   - Essential for Terraform's operation, the state file records the details of resources created and is referenced in subsequent operations.
+   - Can be stored locally or remotely, with the default name `terraform.tfstate`.
+
+3. **terraform destroy**
+
+   **Description**:
+   - Destroys the infrastructure managed by Terraform, as defined in the state file.
+
+   **Functionality**:
+   - Reads the state file and removes all tracked resources.
+   - Should be used with caution, as it is irreversible.
+
+   **Usage**:
+   ```shell
+   $ terraform destroy
+   ```
+
+   **Benefits**:
+   - Simplifies cleanup of resources, ensuring uniform deletion of infrastructure.
+   - Saves time by eliminating the need for custom scripts to remove resources.
+
+#### Summary
+
+- **terraform plan**: Reviews the code and shows the planned changes.
+- **terraform apply**: Deploys and manages the infrastructure, updating the state file.
+- **terraform destroy**: Cleans up and deletes all tracked resources.
+
+These commands align with the Terraform core workflow and are crucial for effective infrastructure management. To reinforce these concepts, a hands-on lab is available at the end of this section.
+
+### Hands-on Lab
+
+To practice these commands and understand the Terraform workflow better, be sure to complete the hands-on lab provided at the end of this section. This will give you practical experience in using `terraform plan`, `terraform apply`, and `terraform destroy`.
