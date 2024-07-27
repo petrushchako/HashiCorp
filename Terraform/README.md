@@ -506,3 +506,115 @@ These commands align with the Terraform core workflow and are crucial for effect
 ### Hands-on Lab
 
 To practice these commands and understand the Terraform workflow better, be sure to complete the hands-on lab provided at the end of this section. This will give you practical experience in using `terraform plan`, `terraform apply`, and `terraform destroy`.
+
+
+
+
+
+<br>
+
+
+### Resource Addressing in Terraform and Understanding Terraform Code
+
+#### Overview
+
+This lesson introduces the fundamental concepts of Terraform code, focusing on resource addressing. We'll explore provider blocks, resource blocks, and data source blocks, which are essential for defining and managing infrastructure with Terraform.
+
+#### Provider Block
+
+A provider block configures the necessary providers for Terraform to interact with different cloud platforms. Providers abstract away the API calls under the hood.
+
+##### Example: AWS Provider
+
+```hcl
+provider "aws" {
+  region = "us-west-2"
+}
+```
+
+- **Keyword**: `provider`
+- **Provider Name**: `aws`
+- **Configuration Parameters**: Arguments for the AWS provider, such as `region`.
+
+##### Example: GCP Provider
+
+```hcl
+provider "google" {
+  credentials = file("path/to/credentials.json")
+  project     = "my-gcp-project"
+  region      = "us-central1"
+}
+```
+
+- **Keyword**: `provider`
+- **Provider Name**: `google`
+- **Configuration Parameters**:
+  - `credentials`: Path to the authentication credentials file.
+  - `project`: GCP project ID.
+  - `region`: GCP region.
+
+#### Resource Block
+
+A resource block defines a resource that Terraform will create and manage. Each resource is associated with a provider.
+
+##### Example: AWS EC2 Instance
+
+```hcl
+resource "aws_instance" "web" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+}
+```
+
+- **Keyword**: `resource`
+- **Resource Type**: `aws_instance`
+- **Resource Name**: `web`
+- **Configuration Arguments**:
+  - `ami`: Amazon Machine Image ID.
+  - `instance_type`: EC2 instance type.
+
+**Accessing Resource Attributes**:
+
+To access attributes of the resource within Terraform code:
+
+```hcl
+aws_instance.web.id
+```
+
+#### Data Source Block
+
+A data source block fetches data from existing resources, allowing you to reference and use this information in your Terraform configuration.
+
+##### Example: AWS EC2 Instance Data Source
+
+```hcl
+data "aws_instance" "my-vm" {
+  instance_id = "i-0abcdef1234567890"
+}
+```
+
+- **Keyword**: `data`
+- **Resource Type**: `aws_instance`
+- **Resource Name**: `my-vm`
+- **Configuration Arguments**:
+  - `instance_id`: ID of the existing EC2 instance.
+
+**Accessing Data Source Attributes**:
+
+To access attributes of the data source within Terraform code:
+
+```hcl
+data.aws_instance.my-vm.id
+```
+
+#### Default Behaviors and Best Practices
+
+- **File Extensions**: Terraform executes code in files ending with `.tf`. Ensure your Terraform code is saved with this extension.
+- **Provider Registry**: By default, Terraform sources providers from the [Terraform Registry](https://registry.terraform.io/). Providers can also be sourced locally or from custom locations.
+- **Custom Providers**: Terraform supports custom providers, allowing for flexibility in managing infrastructure beyond the default providers.
+
+#### Summary
+
+- **Provider Block**: Configures the necessary providers for interacting with cloud platforms.
+- **Resource Block**: Defines resources to be created and managed by Terraform.
+- **Data Source Block**: Fetches data from existing resources for reference within Terraform configurations.
