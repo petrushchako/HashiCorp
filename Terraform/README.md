@@ -618,3 +618,36 @@ data.aws_instance.my-vm.id
 - **Provider Block**: Configures the necessary providers for interacting with cloud platforms.
 - **Resource Block**: Defines resources to be created and managed by Terraform.
 - **Data Source Block**: Fetches data from existing resources for reference within Terraform configurations.
+
+
+<br><br>
+
+## Chapter 4 <br>Terraform Fundamentals
+### Installing Terraform and Terraform Providers
+
+https://developer.hashicorp.com/terraform/install
+
+There are 2 methods to install Terraform:
+1. Download, Unzip, Use
+   1. Download Zipped Binary from Hashicorp Website
+   2. Unzip Terraform Binary
+   3. As a best practice, place it in your system's `$PATH`
+2. Set up Terraform repository on Linux (only)
+   1. Set up a Hashicorp Terraform Repository on Linux (Debian, RHEL, Amazon Linux)
+   2. Use package manager to install Terraform
+   3. Package manager installs and sets it up so that it is ready to use.
+
+    ```sh
+    sudo yum install -y yum-utils
+    sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/RHEL/hashicorp.repo
+    sudo yum -y install terraform
+    ```
+
+
+<br>
+
+#### macOS installation
+```sh
+brew tap hashicorp/tap
+brew install hashicorp/tap/terraform
+```
