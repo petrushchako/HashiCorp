@@ -67,9 +67,9 @@ In this hands-on lab, we will be following the Terraform workflow — Write > Pl
 
 - In this case, it will create 1 resource: the EC2 instance you configured in your code.
 
-If you scroll up, you will notice that only the `ami`, `instance_type`, `subnet_id`, and `tags` properties are configured, as that was included in your code.
+    If you scroll up, you will notice that only the `ami`, `instance_type`, `subnet_id`, and `tags` properties are configured, as that was included in your code.
 
-Everything else, denoted with a + sign, will be created from scratch or will be populated when Terraform creates the resource upon deployment of your code.
+    Everything else, denoted with a + sign, will be created from scratch or will be populated when Terraform creates the resource upon deployment of your code.
 
 
 <br>
