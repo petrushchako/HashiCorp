@@ -651,3 +651,25 @@ There are 2 methods to install Terraform:
 brew tap hashicorp/tap
 brew install hashicorp/tap/terraform
 ```
+
+
+<br>
+
+#### Terraform Providers
+- Providers are Terraform's way of abstracting integrations with API control layer of the infrastructure vendors.
+- Terraform, by default, looks for Providers in the Terraform providers registry. <br>https://registry.terraform.io/browse/providers
+- Providers are plugins. They are released on a separate rhythm from Terraform itself, and each provider has its own series of version numbers.
+- You can write your own custom providers as well! (Beyond scope of certification)
+- Terraform finds and installs providers when initializing working directory(via terraform init).
+- As a best practice Providers should be pegged down to a specific version, SO that any changes across provider version doesn't break your Terraform code.
+    ```hcl
+    provider "azurerm" {
+        version = "2.20.0"
+        features {}
+    }
+
+    providers "aws" {
+        version = "3.7.0"
+        region = "us-east-1"
+    }
+    ```
