@@ -682,8 +682,6 @@ brew install hashicorp/tap/terraform
 
 ### Terraform State: The Concept
 
-**Instructor**: Moosa Khalid
-
 #### Introduction
 
 Terraform state is a fundamental component that enables Terraform to manage infrastructure effectively. Without it, Terraform would not function. This lesson explains the importance of state, its working mechanism, and best practices for managing state files.
