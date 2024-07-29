@@ -673,3 +673,59 @@ brew install hashicorp/tap/terraform
         region = "us-east-1"
     }
     ```
+
+
+
+
+<br>
+
+
+### Terraform State: The Concept
+
+**Instructor**: Moosa Khalid
+
+#### Introduction
+
+Terraform state is a fundamental component that enables Terraform to manage infrastructure effectively. Without it, Terraform would not function. This lesson explains the importance of state, its working mechanism, and best practices for managing state files.
+
+#### Importance of Terraform State
+
+**Resource Tracking**: Terraform state is crucial for tracking resources. It allows Terraform to:
+
+1. **Identify Deployed Resources**: Track what has been deployed.
+2. **Decision Making**: Determine whether resources need to be created, modified, or destroyed.
+
+#### How Terraform State Works
+
+1. **State File**:
+    - A JSON file that maps resources defined in the Terraform configuration to the actual resources in the managed infrastructure.
+    - Contains metadata and details about all deployed resources.
+
+2. **State File Utilization**:
+    - **Deletion**: When issuing the `terraform destroy` command, Terraform references the state file to identify and delete resources.
+    - **Delta Calculation**: Terraform compares the current state (as defined in the state file) with the desired state (as defined in the configuration code) to calculate changes (deltas) and reconcile the infrastructure accordingly.
+
+#### Storing Terraform State
+
+1. **Local Storage**:
+    - By default, the state file is stored locally in the same directory as the Terraform code.
+
+2. **Remote Storage**:
+    - For better integrity and availability, state files can also be stored remotely using supported backend services like AWS S3, Azure Blob Storage, Google Cloud Storage, etc.
+
+#### Security and Integrity of State Files
+
+1. **Never Lose the State File**:
+    - Losing the state file means losing the ability to manage and modify the infrastructure through Terraform, making manual changes cumbersome and error-prone.
+
+2. **Protect the State File**:
+    - Ensure the state file does not fall into the wrong hands, as it may contain sensitive information about the deployed resources.
+
+#### Summary
+
+- **Terraform State**: A JSON file that tracks resources and enables Terraform to manage infrastructure.
+- **Resource Tracking**: Critical for identifying and managing deployed resources.
+- **State File**: Contains metadata and details of resources, helping Terraform calculate and apply changes.
+- **Storage**: Can be stored locally or remotely for better availability.
+- **Security**: Protect and secure the state file to avoid loss of management capabilities and exposure of sensitive data.
+
