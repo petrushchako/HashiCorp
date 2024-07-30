@@ -727,3 +727,141 @@ Terraform state is a fundamental component that enables Terraform to manage infr
 - **Storage**: Can be stored locally or remotely for better availability.
 - **Security**: Protect and secure the state file to avoid loss of management capabilities and exposure of sensitive data.
 
+
+<br>
+
+### Terraform Variables and Outputs
+
+#### Variables in Terraform
+##### Initialization
+- ![](img/terraformVariable.png)
+- Variable declaration snippet
+    ```hcl
+    variable "my-var" {
+        description = "My Test Variable"
+        type        = string
+        default     = "Hello"
+    }
+    ```
+- All the options within `{}` are optional, so you can declare variable as following: `variable "my-var" {}`. <br>However, in this case you will have to provide value for this variable either through an OS environment variable or a command line input to avoid runtime error. 
+
+##### Referencing
+- To use the variable within your configuration you will have to follow format below:
+    ```hcl
+    var.my-var
+    ```
+- You can create variables from the main `tf` file, however it is recomended to gather all variables in a separate file `terraform.tfvars` that is picked up by terraform by default.
+  
+
+##### Variable validation (available from version 0.13)
+- Variable validation allows you to set a criteria for allowed values for a variable:
+    ```hcl
+    variable "my-var" {
+        description = "My Test Variable"
+        type        = string
+        default     = "Hello"
+        validation {
+            condition       = length(var.my-var) > 4
+            error_message   = "The length must be more than 4 characters"
+        }
+    }
+    ```
+
+##### Sensitive variables
+- You can enable a config parameter known as sensitive to prevent Terraform from showing its value during Terraform execution runs, which is the default behavior within Terraform.
+    ```hcl
+    variable "my-var" {
+        description = "My Test Variable"
+        type        = string
+        default     = "Hello"
+        sensitive   = true
+    }
+    ```
+
+
+#### Variable Types and Constraints
+
+Terraform supports various types of variables that you can use to parameterize your configurations. These variable types fall into two categories: base types and complex types.
+
+### Base Types
+
+- **`string`**: Represents a sequence of characters.
+    ```hcl
+    variable "my-string" {
+        type    = string
+        default = "Hello"
+    }
+    ```
+
+- **`number`**: Represents numeric values.
+    ```hcl
+    variable "my-number" {
+        type    = number
+        default = 42
+    }
+    ```
+
+- **`bool`**: Represents boolean values (`true` or `false`).
+    ```hcl
+    variable "my-bool" {
+        type    = bool
+        default = true
+    }
+    ```
+
+### Complex Types
+
+- **`list`**: Represents a sequence of values, all of the same type.
+    ```hcl
+    variable "av-zone-name" {
+        type    = list(string)
+        default = ["us-west-1a"]
+    }
+    ```
+
+- **`set`**: Represents a collection of unique values, all of the same type.
+    ```hcl
+    variable "allowed-ips" {
+        type = set(string)
+        default = ["192.168.1.1", "192.168.1.2"]
+    }
+    ```
+
+- **`map`**: Represents a collection of key-value pairs.
+    ```hcl
+    variable "region-mapping" {
+        type = map(string)
+        default = {
+            "us-east-1" = "US East (N. Virginia)"
+            "us-west-1" = "US West (N. California)"
+        }
+    }
+    ```
+
+- **`object`**: Represents a collection of named attributes that each have their own type.
+    ```hcl
+    variable "docker-ports" {
+        type = list(object({
+            internal = number
+            external = number
+            protocol = string
+        }))
+        default = [
+            {
+                internal = 8300
+                external = 8300
+                protocol = "tcp"
+            }
+        ]
+    }
+    ```
+
+- **`tuple`**: Represents a sequence of values, where each element has its own type.
+    ```hcl
+    variable "example-tuple" {
+        type = tuple([string, number, bool])
+        default = ["example", 123, true]
+    }
+    ```
+
+    
