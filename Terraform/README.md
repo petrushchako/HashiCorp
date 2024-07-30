@@ -864,4 +864,64 @@ Terraform supports various types of variables that you can use to parameterize y
     }
     ```
 
-    
+<br>
+
+#### Terraform Output - Output Values
+
+Output values in Terraform serve as a way to extract information from your configuration and display it back to the user or use it in other configurations or scripts. Here's a detailed breakdown:
+
+- **Display on CLI**: After a successful `terraform apply` or other execution commands, output values are shown in the terminal. This helps users get immediate feedback about the deployed resources.
+  
+- **Track and Use Values**: Output values act like return values. They allow you to track and display specific details about your deployed resources, such as IP addresses, resource IDs, or other pertinent information.
+
+##### Example Usage
+
+```hcl
+output "instance-ip" {
+    description = "VM's Private IP"
+    value       = aws_instance.my-vm.private_ip
+}
+```
+
+In this example, the `output` block named `instance-ip` captures and displays the private IP address of an AWS instance resource named `my-vm`. 
+
+- **description**: (Optional) A human-readable description of what the output value represents.
+- **value**: (Mandatory) The value to be returned. This can reference any attribute of the resources defined in your Terraform configuration.
+
+##### Example Configuration with Outputs
+
+Here’s an example of a Terraform configuration with resources and outputs:
+
+```hcl
+provider "aws" {
+    region = "us-west-1"
+}
+
+resource "aws_instance" "my-vm" {
+    ami           = "ami-0c55b159cbfafe1f0"
+    instance_type = "t2.micro"
+}
+
+output "instance-id" {
+    description = "ID of the EC2 instance"
+    value       = aws_instance.my-vm.id
+}
+
+output "instance-ip" {
+    description = "Private IP of the EC2 instance"
+    value       = aws_instance.my-vm.private_ip
+}
+```
+
+In this example:
+
+- An AWS EC2 instance is created using the `aws_instance` resource.
+- Two outputs are defined:
+  - `instance-id`: Captures and displays the EC2 instance ID.
+  - `instance-ip`: Captures and displays the EC2 instance's private IP address.
+
+##### Best Practices
+
+- **Naming**: Use descriptive names for your outputs to make it clear what each output value represents.
+- **Security**: Be cautious with sensitive information. Avoid exposing sensitive details through outputs that might be displayed in logs or the CLI.
+- **Usage in Modules**: Outputs can be particularly useful when using modules, as they allow you to expose and pass necessary information between different parts of your configuration.
