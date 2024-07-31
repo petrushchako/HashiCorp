@@ -929,7 +929,7 @@ In this example:
 
 
 
-<br>
+<br><br>
 
 
 ### Terraform Provisioners: Overview and Best Practices
@@ -988,7 +988,7 @@ This example demonstrates a destroy-time provisioner that writes `1` to the same
 
 You can use multiple provisioners against the same resource. They will be executed in the order they are defined.
 
-#### Example: Using Multiple Provisioners
+##### Example: Using Multiple Provisioners
 
 ```hcl
 resource "null_resource" "example" {
@@ -1051,7 +1051,7 @@ cat status.txt
 # Output: 1
 ```
 
-### Handling Variables in Provisioners
+#### Handling Variables in Provisioners
 
 When using variables inside provisioners, be aware of potential cyclical dependencies. To avoid these, use the `self` object to access resource attributes.
 
@@ -1072,4 +1072,4 @@ In this example, `self.id` returns the Amazon Machine Image ID of the EC2 virtua
 
 #### Summary
 
-Provisioners in Terraform allow executing custom scripts or commands during the resource lifecycle. While powerful, they should be used sparingly and only when necessary to maintain Terraform's declarative model. Use the `self` object to handle variables within provisioners to avoid cyclical dependencies. Thank you for going through this lesson.
+Provisioners in Terraform allow executing custom scripts or commands during the resource lifecycle. While powerful, they should be used sparingly and only when necessary to maintain Terraform's declarative model. Use the `self` object to handle variables within provisioners to avoid cyclical dependencies. 
