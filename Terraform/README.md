@@ -925,3 +925,151 @@ In this example:
 - **Naming**: Use descriptive names for your outputs to make it clear what each output value represents.
 - **Security**: Be cautious with sensitive information. Avoid exposing sensitive details through outputs that might be displayed in logs or the CLI.
 - **Usage in Modules**: Outputs can be particularly useful when using modules, as they allow you to expose and pass necessary information between different parts of your configuration.
+
+
+
+
+<br>
+
+
+### Terraform Provisioners: Overview and Best Practices
+
+#### What are Provisioners?
+
+Provisioners in Terraform give users a way to execute custom scripts or commands through Terraform resources. They can be run locally, on the system where Terraform commands are executed, or remotely, on a newly spun-up VM. Provisioners are attached to Terraform resources and allow custom connection parameters to connect to remote resources via SSH or WinRM.
+
+#### Types of Provisioners
+
+There are two types of provisioners:
+
+1. **Create-time Provisioner**: Runs when a resource is being created.
+2. **Destroy-time Provisioner**: Runs when a resource is being destroyed.
+
+Provisioners are useful for executing custom one-off automation tasks during these resource lifecycle events.
+
+### Best Practices and Warnings
+
+HashiCorp recommends using provisioners sparingly and only when the underlying vendors (e.g., AWS) do not provide built-in mechanisms for bootstrapping via custom commands or scripts. For instance, AWS allows passing scripts through user data in EC2 virtual machines. If a better inherent method is available, it's best to use that.
+
+Since provisioners can perform any independent action, Terraform cannot track them, breaking Terraform's declarative model. As a result, provisioners are not tracked through Terraform state files.
+
+#### When to Use Provisioners
+
+Use provisioners only when you need to execute actions not covered by Terraform's declarative model or through inherent options for the resources in available providers. Provisioners expect any custom script or command to execute with a return code of 0. Otherwise, the execution is deemed failed, and the resource is marked as tainted, meaning it will be recreated on the next run.
+
+### Provisioner Syntax
+
+#### Create-time Provisioner Example
+
+```hcl
+resource "null_resource" "example" {
+  provisioner "local-exec" {
+    command = "echo 0 > status.txt"
+  }
+}
+```
+
+In this example, a `null_resource` is used with a `local-exec` provisioner that runs a shell command to write `0` to a file named `status.txt`. This provisioner runs during resource creation.
+
+#### Destroy-time Provisioner Example
+
+```hcl
+resource "null_resource" "example" {
+  provisioner "local-exec" {
+    when    = "destroy"
+    command = "echo 1 > status.txt"
+  }
+}
+```
+
+This example demonstrates a destroy-time provisioner that writes `1` to the same `status.txt` file upon resource destruction. The `when` parameter is set to `destroy` to specify this.
+
+#### Multiple Provisioners
+
+You can use multiple provisioners against the same resource. They will be executed in the order they are defined.
+
+#### Example: Using Multiple Provisioners
+
+```hcl
+resource "null_resource" "example" {
+  provisioner "local-exec" {
+    command = "echo 0 > status.txt"
+  }
+
+  provisioner "local-exec" {
+    when    = "destroy"
+    command = "echo 1 > status.txt"
+  }
+}
+```
+
+### Demonstration
+
+#### Create and Destroy Resource
+
+In a Linux shell, create a `main.tf` file with the following content:
+
+```hcl
+provider "null" {}
+
+resource "null_resource" "example" {
+  provisioner "local-exec" {
+    command = "echo 0 > status.txt"
+  }
+
+  provisioner "local-exec" {
+    when    = "destroy"
+    command = "echo 1 > status.txt"
+  }
+}
+```
+
+Run the following commands to execute the configuration:
+
+```sh
+terraform init
+terraform apply -auto-approve
+```
+
+After applying, check the `status.txt` file to see the value `0`:
+
+```sh
+cat status.txt
+# Output: 0
+```
+
+Then, destroy the resource:
+
+```sh
+terraform destroy -auto-approve
+```
+
+Check the `status.txt` file again to see the value `1`:
+
+```sh
+cat status.txt
+# Output: 1
+```
+
+### Handling Variables in Provisioners
+
+When using variables inside provisioners, be aware of potential cyclical dependencies. To avoid these, use the `self` object to access resource attributes.
+
+#### Example: Using Variables in Provisioners
+
+```hcl
+resource "aws_instance" "ec2-virtual-machine" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+
+  provisioner "local-exec" {
+    command = "echo ${self.id} > instance_id.txt"
+  }
+}
+```
+
+In this example, `self.id` returns the Amazon Machine Image ID of the EC2 virtual machine, avoiding cyclical dependencies.
+
+#### Summary
+
+Provisioners in Terraform allow executing custom scripts or commands during the resource lifecycle. While powerful, they should be used sparingly and only when necessary to maintain Terraform's declarative model. Use the `self` object to handle variables within provisioners to avoid cyclical dependencies. Thank you for going through this lesson.
