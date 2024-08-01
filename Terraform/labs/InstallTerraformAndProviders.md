@@ -71,3 +71,43 @@ In this hands-on lab, we'll go through installing and configuring Terraform vers
 
 
 <br><br>
+
+### Deploy the Code with Terraform Apply
+
+1. Enable verbose output logging for Terraform commands using `TF_LOG=TRACE`:
+
+  `export TF_LOG=TRACE`
+
+  > Note: You can turn off verbose logging at any time using the export TF_LOG= command.
+
+2. Initialize the working directory where the code is located:
+
+  `terraform init`
+
+3. Review the actions performed when you deploy the Terraform code:
+
+  `terraform plan`
+
+  > Note: Two resources will be created, consistent with the providers that were configured in the provided code snippet.
+
+4. Deploy the code:
+
+  `terraform apply`
+
+5. When prompted, type `yes` and press `Enter`.
+
+6. Verify that two resources were created with their corresponding Amazon Resource Name (ARN) IDs in the region in which they were spun up.
+
+7. Optionally, verify that the resources were created in their respective regions within the AWS Management Console:
+    - Navigate to the AWS Management Console in your browser.
+    - Verify that you are logged in to the us-east-1 region upon signing in.
+    - Click Services.
+    - Type SNS in the search bar and select Simple Notification Service from the contextual menu.
+    - In the menu on the left, click Topics.
+    - Verify that the topic-us-east resource appears in the list.
+    - At the top-right, click N. Virginia and select us-west-2.
+    - Verify that the topic-us-west resource appears in the list.
+
+8. Tear down the infrastructure you just created before moving on:
+
+  `terraform destroy --auto-approve`
