@@ -931,7 +931,6 @@ In this example:
 
 <br><br>
 
-
 ### Terraform Provisioners: Overview and Best Practices
 
 #### What are Provisioners?
@@ -1073,3 +1072,54 @@ In this example, `self.id` returns the Amazon Machine Image ID of the EC2 virtua
 #### Summary
 
 Provisioners in Terraform allow executing custom scripts or commands during the resource lifecycle. While powerful, they should be used sparingly and only when necessary to maintain Terraform's declarative model. Use the `self` object to handle variables within provisioners to avoid cyclical dependencies. 
+
+
+
+
+
+<br><br><br><br>
+
+
+## Chapter 5<br>Terraform State
+
+### Terraform State Command
+
+#### Terraform State Overview
+
+Terraform state is extremely important to Terraform. Without tracking the state of infrastructure, Terraform cannot work. It maps real-world resources to resources defined in your Terraform code or configuration. By default, the state is dumped into a file called `terraform.tfstate` locally, but it can be stored remotely in services such as AWS S3 as well.
+
+Before Terraform modifies any infrastructure, it checks and makes sure that the state file is up-to-date with the real deployed infrastructure.
+
+#### Key Functions of Terraform State:
+1. **Resource Mapping**: Tracks what resources have been deployed.
+2. **Dependency Tracking**: Maintains dependencies between resources.
+3. **Performance Optimization**: Acts as a cache to avoid extra API calls to the infrastructure provider.
+
+### The Terraform State Command
+
+The `terraform state` command is a utility for modifying and reading the Terraform state file and is used for advanced state management. Normally, you wouldn't need to mess with the Terraform state file outside of the core workflow of Terraform. However, there are scenarios in which you might want to tweak the state outside of the Terraform plan-apply workflow, such as removing or changing resource attributes that are being tracked by Terraform.
+
+#### Common Use Cases:
+- **Advanced State Management**: Modify the state file for advanced management scenarios.
+- **Untracking Resources**: Remove a resource so that it's not tracked by Terraform.
+- **Viewing Resource Details**: Retrieve and view detailed resource information.
+
+### Common Terraform State Subcommands
+
+- `terraform state list`: Lists all resources tracked by the Terraform state file.
+  
+  ```sh
+  terraform state list
+  ```
+
+- `terraform state rm`: Deletes a resource from the Terraform state file, thereby untracking it.
+  
+  ```sh
+  terraform state rm <resource_name>
+  ```
+
+- `terraform state show`: Shows the details of a resource and its attributes tracked by Terraform.
+  
+  ```sh
+  terraform state show <resource_name>
+  ```
