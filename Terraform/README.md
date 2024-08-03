@@ -1131,6 +1131,15 @@ Let's hop onto a local system for a quick demonstration of the Terraform state c
 #### Sample Code
 
 ```hcl
+terraform {
+  required_providers {
+    docker = {
+      source = "kreuzwerker/docker"
+      version = "~> 3.0.1"
+    }
+  }
+}
+
 provider "docker" {}
 
 resource "docker_image" "centos" {
@@ -1139,7 +1148,7 @@ resource "docker_image" "centos" {
 }
 
 resource "docker_container" "centos" {
-  image = docker_image.centos.latest
+  image = docker_image.centos.image_id
   name  = "terraform-centos"
   command = ["sleep", "3600"]
 }
