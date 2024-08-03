@@ -1123,3 +1123,83 @@ The `terraform state` command is a utility for modifying and reading the Terrafo
   ```sh
   terraform state show <resource_name>
   ```
+
+### Demonstration
+
+Let's hop onto a local system for a quick demonstration of the Terraform state command.
+
+#### Sample Code
+
+```hcl
+provider "docker" {}
+
+resource "docker_image" "centos" {
+  name         = "centos:7"
+  keep_locally = false
+}
+
+resource "docker_container" "centos" {
+  image = docker_image.centos.latest
+  name  = "terraform-centos"
+  command = ["sleep", "3600"]
+}
+```
+
+This code pulls the CentOS 7 image and starts a container on your local system.
+
+#### Applying the Configuration
+
+```sh
+terraform init
+terraform apply
+```
+
+#### Listing Resources
+
+```sh
+terraform state list
+```
+
+Output:
+```
+docker_image.centos
+docker_container.centos
+```
+
+#### Showing Resource Details
+
+```sh
+terraform state show docker_container.centos
+```
+
+Output (truncated for brevity):
+```
+# docker_container.centos:
+resource "docker_container" "centos" {
+    name     = "terraform-centos"
+    image    = "sha256:...:centos:7"
+    ...
+}
+```
+
+#### Removing a Resource from State
+
+1. Verify the container is running:
+
+   `docker ps`
+
+2. Remove the container from Terraform's state:
+
+   `terraform state rm docker_container.centos`
+
+3. Destroy remaining resources:
+
+   `terraform destroy`
+
+4. Verify the container is still running:
+
+   `docker ps`
+
+### Conclusion
+
+The `terraform state` command is extremely useful for advanced state management. However, it should be used with caution and is recommended for advanced users who understand the implications of modifying the state file.
