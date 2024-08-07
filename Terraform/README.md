@@ -1278,3 +1278,112 @@ The `terraform state` command is extremely useful for advanced state management.
 ### Conclusion
 
 Local and remote state storage mechanisms in Terraform offer different benefits. Local state is suitable for individual use or testing, while remote state is essential for collaboration, security, and reliability in larger team environments. Features like state locking and output sharing enhance these benefits, making Terraform a powerful tool for managing complex infrastructure across distributed teams.
+
+
+
+
+
+<br><br><br><br>
+
+
+## Chapter 6<br>Terraform Modules
+
+### Terraform Modules
+
+#### Introduction
+A module in Terraform is a directory containing Terraform configuration files, which allows grouping multiple resources used in your project for code reuse and organization.
+
+#### Purpose of Modules
+Modules promote code reuse and avoid redundancy. The directory containing your primary Terraform code is the root module. When invoking other modules, these are called child modules. Inputs can be passed to and outputs retrieved from child modules.
+
+#### Using Modules
+Modules can be incorporated into Terraform configurations in several ways:
+
+1. **Public Registry**: Reference modules from the Terraform Public Registry. Terraform downloads these and stores them in a hidden directory.
+
+   ```hcl
+   module "vpc" {
+     source  = "terraform-aws-modules/vpc/aws"
+     version = "2.77.0"
+     
+     name = "my-vpc"
+     cidr = "10.0.0.0/16"
+     azs             = ["us-west-1a", "us-west-1b", "us-west-1c"]
+     private_subnets = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+     public_subnets  = ["10.0.101.0/24", "10.0.102.0/24", "10.0.103.0/24"]
+
+     tags = {
+       Terraform   = "true"
+       Environment = "dev"
+     }
+   }
+   ```
+
+2. **Private Registry**: Host modules in a Private Registry for closed-source or secure configurations.
+
+3. **Local Modules**: Store modules locally and reference them by file path.
+
+   ```hcl
+   module "local_module_example" {
+     source = "./modules/my_local_module"
+     
+     parameter1 = "value1"
+     parameter2 = "value2"
+   }
+   ```
+
+#### Referencing a Module
+Use the `module` block to reference a module, specifying its source, version, and input parameters.
+
+```hcl
+module "example" {
+  source  = "path/to/module"
+  version = "1.0.0"
+
+  input_variable1 = "value1"
+  input_variable2 = "value2"
+}
+```
+
+#### Best Practices
+Specify module versions to prevent unexpected changes from updates. Other parameters include:
+
+- `count`: Creates multiple instances of the module's resources.
+- `for_each`: Iterates over complex variables.
+- `providers`: Binds specific providers to the module.
+- `depends_on`: Sets module dependencies.
+
+#### Inputs and Outputs
+Modules accept inputs and return outputs, defined using the `output` block, to be used in the main configuration.
+
+```hcl
+output "subnet_id" {
+  value = aws_subnet.my_subnet.id
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-12345678"
+  instance_type = "t2.micro"
+  subnet_id     = module.vpc.subnet_id
+}
+```
+
+#### Consuming Module Outputs
+Consume outputs from a child module using the `module` keyword, the module name, and the output variable's name.
+
+```hcl
+module "vpc" {
+  source  = "terraform-aws-modules/vpc/aws"
+  version = "2.77.0"
+  ...
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-12345678"
+  instance_type = "t2.micro"
+  subnet_id     = module.vpc.public_subnets[0]
+}
+```
+
+#### Conclusion
+Terraform modules enhance flexibility by enabling code reuse and modularization. Understanding and leveraging modules can streamline your Terraform projects and improve team collaboration. Thank you for your attention to this lesson.
