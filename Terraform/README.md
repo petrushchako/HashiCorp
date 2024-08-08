@@ -1387,3 +1387,46 @@ resource "aws_instance" "example" {
 
 #### Conclusion
 Terraform modules enhance flexibility by enabling code reuse and modularization. Understanding and leveraging modules can streamline your Terraform projects and improve team collaboration. Thank you for your attention to this lesson.
+
+
+
+
+<br>
+
+
+### Interacting with Terraform Module Inputs and Outputs
+
+#### Decalaring Module in Code
+
+- Module inputs are arbitrarily named parameters that you pass inside the `module` block.
+- These inputs can be used as variables inside the module code.
+
+    ```hcl
+    module "my-vpc-module'{ 
+        source = . /modules/vpc"
+        server-name = 'us-east-1' # <- Input parameter(s) for module
+    }
+    ```
+- Inside module `var.server-name`
+
+<br>
+
+#### Terraform Module Output 
+- The outputs declared inside Terraform module code can be fed back into the root module or your main code.
+- Output invocation convention in Terraform code
+
+    `module.<name-of-module>.<name-of-output>`
+
+- Inside module:
+
+    ```hcl
+    # my-vpc-module
+    output "ip_address"{
+        value = aws_instance.private_ip
+    }
+    ```
+- In root file:
+
+    `module.my-vpc-module.ip_address`
+
+    
