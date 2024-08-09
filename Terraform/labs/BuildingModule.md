@@ -35,7 +35,7 @@ Terraform modules are a good way to abstract out repeated chunks of code, making
     └── outputs.tf
     ```
 
-<br>
+<br><br>
 
 ## Write Your Terraform VPC Module Code
 - `terraform_project/modules/vpc/main.tf`:
@@ -80,3 +80,41 @@ Terraform modules are a good way to abstract out repeated chunks of code, making
 
     > Note: The code in outputs.tf is critical to exporting values to your main Terraform code, where you'll be referencing this module. Specifically, it returns the subnet and AMI IDs for your EC2 instance.
 
+<br><br>
+
+## Write Your Main Terraform Project Code
+- `terraform_project/main.tf`:
+    ```hcl
+    variable "main_region" {
+        type    = string
+        default = "us-east-1"
+    }
+
+    provider "aws" {
+        region = var.main_region
+    }
+
+    module "vpc" {
+        source = "./modules/vpc"
+        region = var.main_region
+    }
+
+    resource "aws_instance" "my-instance" {
+        ami           = module.vpc.ami_id
+        subnet_id     = module.vpc.subnet_id
+        instance_type = "t2.micro"
+    }
+    ```
+
+    > Note: The code in main.tf invokes the VPC module that you created earlier. Notice how you're referencing the code using the source option within the module block to let Terraform know where the module code resides.
+
+- `terraform_project/outputs.tf`:
+
+    ```hcl
+    output "PrivateIP" {
+        description = "Private IP of EC2 instance"
+        value       = aws_instance.my-instance.private_ip
+    }
+    ```
+
+<br>
