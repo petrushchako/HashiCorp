@@ -10,3 +10,29 @@ Terraform modules are a good way to abstract out repeated chunks of code, making
 - Deploy Your Code and Test Out Your Module
 
 
+<br><br>
+
+
+## Solution
+
+## Create the Directory Structure for the Terraform Project
+- Check the Terraform status using the version command:
+
+    `terraform version`
+
+    Since the Terraform version is returned, you have validated that the Terraform binary is installed and functioning properly.
+
+- Create following lab structure:
+  
+    ```sh
+    terraform_project
+    ├── modules
+    │    └── vpc
+    │        ├── main.tf
+    │        ├── variables.tf
+    │        └── outputs.tf
+    ├── main.tf
+    └── outputs.tf
+    ```
+
+
