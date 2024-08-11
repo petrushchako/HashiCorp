@@ -1500,3 +1500,108 @@ Terraform includes a command-line utility, `terraform console`, which allows you
 #### Conclusion
 
 Terraform’s built-in functions are a powerful feature that can help you write more concise and flexible infrastructure code. The `terraform console` tool provides a convenient way to experiment with these functions and understand their behavior before applying them in your configurations.
+
+
+
+<br><br>
+
+
+### Terraform Type Constraints (Collections & Structural)
+
+Terraform Type Constraints control the types of variable values that can be passed to your Terraform code. Type constraints ensure that variables are assigned the correct type of data, which can be either primitive or complex types.
+
+#### Primitive Types
+
+Primitive types are single-value types, such as:
+
+- **Number**: Represents numeric values.
+  - Example: `replicas = 3`
+- **String**: Represents a sequence of characters enclosed in quotes.
+  - Example: `name = "cluster2"`
+- **Boolean (bool)**: Represents true/false values.
+  - Example: `backup = true`
+
+#### Complex Types
+
+Complex types allow for more sophisticated data structures by combining multiple values. These types can be categorized into **collection** and **structural** types.
+
+##### Collection Types
+
+Collection types allow grouping multiple values of a single primitive type into a single variable. The primary collection types in Terraform are:
+
+- **List**: An ordered sequence of values of the same type.
+  - Example: A list of strings.
+    ```hcl
+    variable "example_list" {
+      type = list(string)
+      default = ["value1", "value2"]
+    }
+    ```
+- **Map**: A collection of key-value pairs, where each value is of the same type.
+  - Example: A map of numbers.
+    ```hcl
+    variable "example_map" {
+      type = map(number)
+      default = {
+        key1 = 1
+        key2 = 2
+      }
+    }
+    ```
+- **Set**: An unordered collection of unique values of the same type.
+  - Example: A set of strings.
+    ```hcl
+    variable "example_set" {
+      type = set(string)
+      default = ["value1", "value2"]
+    }
+    ```
+
+##### Structural Types
+
+Structural types allow grouping multiple values of different primitive types. These types include:
+
+- **Object**: A collection of named attributes that can be of different types.
+  - Example: An object with string and number types.
+    ```hcl
+    variable "example_object" {
+      type = object({
+        name = string
+        age  = number
+      })
+      default = {
+        name = "John"
+        age  = 30
+      }
+    }
+    ```
+- **Tuple**: An ordered sequence of elements of different types.
+  - Example: A tuple with string, number, and boolean types.
+    ```hcl
+    variable "example_tuple" {
+      type = tuple([string, number, bool])
+      default = ["value1", 2, true]
+    }
+    ```
+
+#### Any Type
+
+The `any` type constraint serves as a placeholder for an undetermined primitive type. Terraform automatically determines the actual type at runtime.
+
+- **Any**: The type is inferred based on the value assigned.
+  - Example: A list with type `any`.
+    ```hcl
+    variable "example_any" {
+      type = list(any)
+      default = [1, 2, 3]
+    }
+    ```
+
+#### Summary
+
+- **Primitive Types**: Single values like numbers, strings, and booleans.
+- **Collection Types**: Multiple values of the same type (e.g., list, map, set).
+- **Structural Types**: Multiple values of different types (e.g., object, tuple).
+- **Any Type**: A placeholder for an undetermined type, decided at runtime.
+
+Terraform Type Constraints enhance code flexibility, enabling more robust and maintainable infrastructure as code practices.
