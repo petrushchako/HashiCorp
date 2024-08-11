@@ -1605,3 +1605,108 @@ The `any` type constraint serves as a placeholder for an undetermined primitive 
 - **Any Type**: A placeholder for an undetermined type, decided at runtime.
 
 Terraform Type Constraints enhance code flexibility, enabling more robust and maintainable infrastructure as code practices.
+
+
+
+<br><br>
+
+
+### Dynamic Blocks in Terraform
+#### What are Dynamic Blocks?
+
+- Dynamic blocks in Terraform are a powerful feature that allow you to construct repeatable nested configuration blocks inside resources. 
+- These blocks can be used in various contexts, such as:
+  - resource blocks
+  - data blocks
+  - provider blocks
+  - provisioner blocks. 
+- They are particularly useful when you need to replicate similar blocks multiple times, reducing redundancy and making your code more maintainable.
+
+#### The Problem Dynamic Blocks Solve
+
+Let's consider an example where you need to create an AWS security group with multiple ingress rules. Without dynamic blocks, each rule would require its own `ingress` block, leading to repetitive, bloated code that's hard to maintain. Here's what that might look like:
+
+```hcl
+resource "aws_security_group" "my-sg" {
+  name = "my-aws-security-group"
+  vpc_id = aws_vpc.my_vpc.id
+  ingress {
+    from_port   = 80
+    to_port     = 80
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # Additional ingress blocks...
+}
+```
+
+#### Using Dynamic Blocks
+
+- Dynamic blocks help streamline this code. Instead of writing separate `ingress` blocks for each rule, you can use a `dynamic` block to generate them programmatically.
+- You place the `dynamic` keywork ahead of block you would to replicate (i.e. `dynamic "ingress"{}`)
+
+```hcl
+resource "aws_security_group" "my-sg" {
+  name = "my-aws-security-group"
+  vpc_id = aws_vpc.my-vpc.id
+
+  dynamic "ingress" {     # The config block you're trying to replicate
+  
+    for_each = var.rules  # Complex variable to iterate over
+
+    content {             # The nested 'content' block defines the body of each generated block, using the variable you provided
+      from_port   = ingress.value[from_port]
+      to_port     = ingress.value[to_port]
+      protocol    = ingress.value[protocol]
+      cidr_blocks = ingress.value[cidrs]
+    }
+  }
+}
+```
+
+- **Dynamic Block Keyword**: The `dynamic` keyword introduces the block.
+- **Nested Block Name**: The name of the nested block (e.g., `ingress`).
+- **for_each**: Iterates over a complex variable, generating a block for each item.
+- **content Block**: Defines the structure of the repeated block.
+
+#### Complex Variable Example
+
+Dynamic blocks rely on complex variables to function. Here's an example of a complex variable passed to the `for_each` loop:
+
+```hcl
+variable "rules" {
+  default = [
+    {
+      from_port   = 80
+      to_port     = 80
+      protocol    = "tcp"
+      cidrs = ["0.0.0.0/0"]
+    },
+    {
+      from_port   = 443
+      to_port     = 443
+      protocol    = "tcp"
+      cidrs = ["0.0.0.0/0"]
+    }
+  ]
+}
+```
+
+This variable defines a list of objects, each representing an ingress rule. The `for_each` loop in the dynamic block iterates over this list, creating an `ingress` block for each rule.
+
+#### Key Takeaways
+
+- **Dynamic blocks** reduce code repetition by programmatically generating nested blocks.
+- They are especially useful in **Terraform modules** and other scenarios where you need to hide complex details.
+- While dynamic blocks make your code cleaner, they can also make it harder to read, so use them judiciously.
+
+
+
