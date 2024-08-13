@@ -1710,3 +1710,94 @@ This variable defines a list of objects, each representing an ingress rule. The 
 
 
 
+
+
+<br><br>
+
+## Chapter 8<br>Terraform CLI
+
+### Terraform fmt, taint, and import Commands
+
+
+#### **Terraform Format Command**
+
+The **Terraform format** command is a tool that ensures your Terraform code is consistently formatted. It helps keep your code neat, readable, and easier to maintain, which is especially useful when collaborating with others via version control systems.
+
+- **Purpose**: To format `.tf` files for consistency.
+- **Syntax**: 
+  ```bash
+  terraform fmt
+  ```
+  This command formats all `.tf` files in the current directory by default.
+  
+- **When to Use**:
+  - Before pushing code to version control systems.
+  - After upgrading Terraform or its modules.
+  - After making changes to the code, especially if you want to quickly format it without worrying about syntax.
+
+
+#### **Terraform Taint Command**
+
+The **Terraform taint** command is used to mark an existing resource for recreation. It flags a resource in the state file, causing Terraform to destroy and recreate it during the next `terraform apply`.
+
+- **Purpose**: To mark a resource for destruction and re-creation.
+- **Syntax**: 
+  ```bash
+  terraform taint <resource_address>
+  ```
+  Replace `<resource_address>` with the specific resource in your Terraform configuration.
+  
+- **When to Use**:
+  - **Forcing Provisioners to Run**: Since provisioners only run when a resource is created or destroyed, tainting a resource ensures they will run again.
+  - **Replacing Misbehaving Resources**: If a resource isn't functioning as expected, tainting forces Terraform to recreate it.
+  - **Mimicking Side Effects**: When recreating a resource triggers automation (e.g., an API call during VM startup), tainting helps simulate this.
+
+
+#### **Terraform Import Command**
+
+The **Terraform import** command is used to bring an existing resource under Terraform management. It maps a resource in your infrastructure to a resource block in your Terraform code using the resource’s unique identifier (ID).
+
+- **Purpose**: To import existing infrastructure resources into Terraform management.
+- **Syntax**: 
+  ```bash
+  terraform import <resource_address> <resource_id>
+  ```
+  Replace `<resource_address>` with the Terraform resource block and `<resource_id>` with the unique identifier of the real-world resource.
+  
+- **When to Use**:
+  - When working with existing infrastructure that isn't managed by Terraform.
+  - When you’re only allowed to manage, not create, infrastructure resources.
+  - When bringing unmanaged infrastructure resources under Terraform's control.
+
+---
+
+#### **Terraform Configuration Block**
+
+The **Terraform block** is a special block in Terraform configurations that controls the behavior of Terraform itself. It sets constraints and requirements that must be met for Terraform to operate properly.
+
+- **Purpose**: To configure Terraform's behavior, set version constraints, specify backend storage, and enable experimental features.
+  
+- **Example**:
+  ```hcl
+  terraform {
+    required_version = ">= 0.13"
+    
+    required_providers {
+      aws = {
+        source  = "hashicorp/aws"
+        version = ">= 3.0"
+      }
+    }
+  }
+  ```
+  - **required_version**: Ensures Terraform only runs if the version is `>= 0.13`.
+  - **required_providers**: Specifies that the AWS provider must be version `>= 3.0`.
+
+#### Summary
+
+1. **Terraform Format**: Ensures your code is consistently formatted.
+2. **Terraform Taint**: Marks resources for destruction and recreation.
+3. **Terraform Import**: Brings existing infrastructure under Terraform management.
+4. **Terraform Configuration Block**: Configures Terraform's behavior and sets version requirements.
+
+These commands are vital for managing your Terraform code and infrastructure effectively. Don't forget to check out the hands-on lab to get practical experience with these commands!
