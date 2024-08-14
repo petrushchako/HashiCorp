@@ -1800,4 +1800,100 @@ The **Terraform block** is a special block in Terraform configurations that cont
 3. **Terraform Import**: Brings existing infrastructure under Terraform management.
 4. **Terraform Configuration Block**: Configures Terraform's behavior and sets version requirements.
 
-These commands are vital for managing your Terraform code and infrastructure effectively. Don't forget to check out the hands-on lab to get practical experience with these commands!
+These commands are vital for managing your Terraform code and infrastructure effectively. 
+
+
+
+<br><br>
+
+### Terraform Workspaces (CLI)
+
+Terraform workspaces, also known as CLI workspaces, allow you to maintain alternate state files within the same working directory. As you know, state files are critical to Terraform's workflow as they serve as Terraform's source of truth. By using alternate state files, you can manage distinct environments, such as development, staging, and production, without duplicating your code.
+
+#### Default Workspace
+Terraform always provides a default workspace. If you've used Terraform without creating additional workspaces, you've been using this default workspace. Each workspace has its own independent state file, allowing you to deploy separate environments using the same Terraform code.
+
+#### Common Terraform Workspace Commands
+Here are some essential Terraform workspace commands:
+
+1. **Creating a Workspace**:
+   - The command `terraform workspace new <workspace_name>` creates a new workspace.
+   - Example: `terraform workspace new dev`
+
+2. **Switching Between Workspaces**:
+   - The command `terraform workspace select <workspace_name>` lets you switch to an existing workspace.
+   - Example: `terraform workspace select dev`
+
+#### Why Use Terraform Workspaces?
+- **Parallel Testing**: Workspaces allow you to test changes in an isolated environment by creating a distinct state file for each workspace.
+- **Version Control Integration**: Workspaces can be modeled against branches in Git, allowing you to test different environments without affecting the production state file.
+- **Collaboration**: Teams can work on separate environments without stepping on each other's toes. For example, a developer could work in a `dev` workspace while the `production` workspace remains untouched.
+
+#### Using the `terraform.workspace` Variable
+Terraform provides the `terraform.workspace` variable, which reflects the current workspace name. This variable can be used to customize your resource names, regions, and other configurations based on the active workspace.
+
+##### Example 1: EC2 Instance Count
+You can adjust the number of EC2 instances based on the workspace:
+
+```hcl
+resource "aws_instance" "example" {
+  count = terraform.workspace == "default" ? 5 : 1
+  # Other configuration
+}
+```
+In this example, the default workspace spins up 5 instances, while any other workspace only creates 1 instance.
+
+##### Example 2: S3 Bucket Name
+You can also append the workspace name to an S3 bucket:
+
+```hcl
+resource "aws_s3_bucket" "example" {
+  bucket = "my-bucket-${terraform.workspace}"
+  # Other configuration
+}
+```
+If you’re in the `dev` workspace, the bucket will be named `my-bucket-dev`.
+
+#### Demonstration
+Let's dive into a demo where we'll use Terraform workspaces to deploy resources in different environments.
+
+1. **Check Current Workspace**:
+   ```bash
+   terraform workspace list
+   ```
+   If you’ve just installed Terraform, you'll see the default workspace.
+
+2. **Create and Switch Workspaces**:
+   - Create a `test` workspace:
+     ```bash
+     terraform workspace new test
+     ```
+   - Verify you're in the `test` workspace:
+     ```bash
+     terraform workspace list
+     ```
+     The `test` workspace will have an asterisk next to it, indicating it is active.
+
+3. **Reviewing Terraform Configuration**:
+   - In your `network.tf` and `main.tf` files, you might see the `terraform.workspace` variable being used to set resource names and regions dynamically.
+
+4. **Deploying Resources**:
+   - Initialize and apply the configuration:
+     ```bash
+     terraform init
+     terraform apply -auto-approve
+     ```
+   - Based on the workspace, resources will be deployed with names reflecting the workspace, and infrastructure will be deployed in the region specific to that workspace.
+
+5. **Verify Deployment**:
+   - Log into the AWS Console and check the region that corresponds to your active workspace. For instance, if you're in the `test` workspace, the EC2 instance might be named `test-ec2` and be deployed in `us-west-1`.
+
+6. **Switching to Default Workspace**:
+   - Switch to the default workspace:
+     ```bash
+     terraform workspace select default
+     ```
+   - Apply the configuration again to see resources deployed with the `default` prefix in the `us-east-2` region.
+
+#### Conclusion
+Workspaces offer a powerful way to manage multiple environments with the same Terraform configuration. By leveraging workspaces, you can test, stage, and deploy environments without risking your production setup. The use of `terraform.workspace` makes it easy to dynamically adjust configurations based on the active workspace.
