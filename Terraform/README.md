@@ -81,8 +81,8 @@
 
 
 
+<br><br><br><br>
 
-<br><hr><br>
 
 
 ## Chapter 2<br>Understanding Infrastructure As Code
@@ -148,7 +148,8 @@ In this example:
 - The `resource` block defines an AWS EC2 instance with a specific AMI and instance type.
 
 
-<br>
+<br><br><br>
+
 
 ### Cloud Agnostic IaC with Terraform
 
@@ -183,7 +184,6 @@ Terraform is a powerful tool for codifying configurations for software-defined n
 - Promotes high availability and disaster recovery through multi-cloud deployments.
 - Supports a diverse and expanding range of cloud services and providers.
 - Ensures consistent and repeatable infrastructure setups with its declarative approach.
-
 
 
 <br>
@@ -259,9 +259,8 @@ Terraform’s cloud-agnostic approach is made possible by its use of provider pl
 
 
 
-
-
 <br><br><br><br>
+
 
 
 ## Chapter 3 <br>IaC with Terraform
@@ -333,8 +332,9 @@ The Terraform workflow involves three primary phases: writing code, reviewing ch
 
 
 
+<br><br><br>
 
-<br>
+
 
 ### Terraform Init (Initializing the Working Directory)
 
@@ -412,8 +412,7 @@ $ terraform init
 
 
 
-
-<br>
+<br><br><br>
 
 
 ### Terraform Key Concepts: Plan, Apply and Destroy
@@ -510,8 +509,7 @@ To practice these commands and understand the Terraform workflow better, be sure
 
 
 
-
-<br>
+<br><br><br>
 
 
 ### Resource Addressing in Terraform and Understanding Terraform Code
@@ -620,7 +618,10 @@ data.aws_instance.my-vm.id
 - **Data Source Block**: Fetches data from existing resources for reference within Terraform configurations.
 
 
+
 <br><br><br><br>
+
+
 
 ## Chapter 4 <br>Terraform Fundamentals
 ### Installing Terraform and Terraform Providers
@@ -677,7 +678,7 @@ brew install hashicorp/tap/terraform
 
 
 
-<br>
+<br><br><br>
 
 
 ### Terraform State: The Concept
@@ -728,7 +729,8 @@ Terraform state is a fundamental component that enables Terraform to manage infr
 - **Security**: Protect and secure the state file to avoid loss of management capabilities and exposure of sensitive data.
 
 
-<br>
+<br><br><br>
+
 
 ### Terraform Variables and Outputs
 
@@ -929,7 +931,7 @@ In this example:
 
 
 
-<br><br><br><br>
+<br><br><br>
 
 ### Terraform Provisioners: Overview and Best Practices
 
@@ -1216,7 +1218,8 @@ The `terraform state` command is extremely useful for advanced state management.
 
 
 
-<br><br><br><br>
+<br><br><br>
+
 
 ### Local and Remote State Storage
 
@@ -1391,7 +1394,7 @@ Terraform modules enhance flexibility by enabling code reuse and modularization.
 
 
 
-<br>
+<br><br><br>
 
 
 ### Interacting with Terraform Module Inputs and Outputs
@@ -1503,7 +1506,7 @@ Terraform’s built-in functions are a powerful feature that can help you write 
 
 
 
-<br><br><br><br>
+<br><br><br>
 
 
 ### Terraform Type Constraints (Collections & Structural)
@@ -1608,7 +1611,7 @@ Terraform Type Constraints enhance code flexibility, enabling more robust and ma
 
 
 
-<br><br><br><br>
+<br><br><br>
 
 
 ### Dynamic Blocks in Terraform
@@ -1804,7 +1807,7 @@ These commands are vital for managing your Terraform code and infrastructure eff
 
 
 
-<br><br><br><br>
+<br><br><br>
 
 ### Terraform Workspaces (CLI)
 
@@ -1897,3 +1900,6 @@ Let's dive into a demo where we'll use Terraform workspaces to deploy resources 
 
 #### Conclusion
 Workspaces offer a powerful way to manage multiple environments with the same Terraform configuration. By leveraging workspaces, you can test, stage, and deploy environments without risking your production setup. The use of `terraform.workspace` makes it easy to dynamically adjust configurations based on the active workspace.
+
+
+<br><br><br>
