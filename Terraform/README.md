@@ -261,7 +261,7 @@ Terraform’s cloud-agnostic approach is made possible by its use of provider pl
 
 
 
-<br><br>
+<br><br><br><br>
 
 
 ## Chapter 3 <br>IaC with Terraform
@@ -620,7 +620,7 @@ data.aws_instance.my-vm.id
 - **Data Source Block**: Fetches data from existing resources for reference within Terraform configurations.
 
 
-<br><br>
+<br><br><br><br>
 
 ## Chapter 4 <br>Terraform Fundamentals
 ### Installing Terraform and Terraform Providers
@@ -929,7 +929,7 @@ In this example:
 
 
 
-<br><br>
+<br><br><br><br>
 
 ### Terraform Provisioners: Overview and Best Practices
 
@@ -1216,7 +1216,7 @@ The `terraform state` command is extremely useful for advanced state management.
 
 
 
-<br><br>
+<br><br><br><br>
 
 ### Local and Remote State Storage
 
@@ -1503,7 +1503,7 @@ Terraform’s built-in functions are a powerful feature that can help you write 
 
 
 
-<br><br>
+<br><br><br><br>
 
 
 ### Terraform Type Constraints (Collections & Structural)
@@ -1608,7 +1608,7 @@ Terraform Type Constraints enhance code flexibility, enabling more robust and ma
 
 
 
-<br><br>
+<br><br><br><br>
 
 
 ### Dynamic Blocks in Terraform
@@ -1712,13 +1712,11 @@ This variable defines a list of objects, each representing an ingress rule. The 
 
 
 
-<br><br>
+<br><br><br><br>
 
 ## Chapter 8<br>Terraform CLI
 
 ### Terraform fmt, taint, and import Commands
-
-
 #### **Terraform Format Command**
 
 The **Terraform format** command is a tool that ensures your Terraform code is consistently formatted. It helps keep your code neat, readable, and easier to maintain, which is especially useful when collaborating with others via version control systems.
@@ -1735,6 +1733,7 @@ The **Terraform format** command is a tool that ensures your Terraform code is c
   - After upgrading Terraform or its modules.
   - After making changes to the code, especially if you want to quickly format it without worrying about syntax.
 
+<br>
 
 #### **Terraform Taint Command**
 
@@ -1752,6 +1751,7 @@ The **Terraform taint** command is used to mark an existing resource for recreat
   - **Replacing Misbehaving Resources**: If a resource isn't functioning as expected, tainting forces Terraform to recreate it.
   - **Mimicking Side Effects**: When recreating a resource triggers automation (e.g., an API call during VM startup), tainting helps simulate this.
 
+<br>
 
 #### **Terraform Import Command**
 
@@ -1769,7 +1769,7 @@ The **Terraform import** command is used to bring an existing resource under Ter
   - When you’re only allowed to manage, not create, infrastructure resources.
   - When bringing unmanaged infrastructure resources under Terraform's control.
 
----
+<br>
 
 #### **Terraform Configuration Block**
 
@@ -1804,7 +1804,7 @@ These commands are vital for managing your Terraform code and infrastructure eff
 
 
 
-<br><br>
+<br><br><br><br>
 
 ### Terraform Workspaces (CLI)
 
