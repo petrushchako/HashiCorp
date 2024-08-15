@@ -1903,3 +1903,59 @@ Workspaces offer a powerful way to manage multiple environments with the same Te
 
 
 <br><br><br>
+
+
+### Debugging Terraform.
+
+Troubleshooting is an essential skill in software development, and Terraform is no exception. In this lesson, we'll learn how to enable verbose logging in Terraform, which can be invaluable for diagnosing issues.
+
+#### Understanding `TF_LOG`
+Terraform uses an environment variable called `TF_LOG` to control the verbosity of its logs. By default, logging is disabled, but when enabled, `TF_LOG` can output detailed logs directly to your terminal, helping you troubleshoot issues. There are five levels of verbosity:
+
+1. **TRACE**: The most detailed logging level, providing comprehensive information including internal Terraform operations and backend API calls.
+2. **DEBUG**: Detailed debugging information, useful for understanding the flow of Terraform's execution.
+3. **INFO**: General operational information, showing the high-level steps Terraform is taking.
+4. **WARN**: Warnings about potential issues that may not halt execution but are noteworthy.
+5. **ERROR**: Only logs errors that prevent Terraform from proceeding.
+
+### Redirecting Logs to a File with `TF_LOG_PATH`
+In addition to displaying logs on your screen, Terraform allows you to redirect these logs to a file using the `TF_LOG_PATH` environment variable. This can be especially useful for reviewing logs later or when the output is too lengthy to manage on-screen.
+
+#### Demonstration
+
+1. **Enable Verbose Logging**:
+   - First, we’ll set the `TF_LOG` variable to `TRACE` level to capture the most detailed logs:
+     ```bash
+     export TF_LOG=TRACE
+     ```
+   - Now, when you run any Terraform command, such as `terraform init`, you’ll see a flood of detailed logs on your screen.
+
+2. **Run `terraform init`**:
+   - After setting `TF_LOG`, run the following command:
+     ```bash
+     terraform init
+     ```
+   - The terminal will now display a significant amount of information, including configuration file paths, Terraform version details, and internal processes such as plugin initialization and backend API calls.
+
+   - **Key Takeaway**: While `TRACE` provides comprehensive logs, it can be overwhelming to parse through this information directly on your screen.
+
+3. **Redirect Logs to a File**:
+   - To make the logs easier to manage, we’ll redirect them to a file. Set the `TF_LOG_PATH` variable to specify the file path where the logs should be saved:
+     ```bash
+     export TF_LOG_PATH=./terraform.log
+     ```
+   - Now, run another Terraform command, such as `terraform plan`:
+     ```bash
+     terraform plan
+     ```
+   - This time, you won’t see the verbose logs on your screen, but they will be captured in the `terraform.log` file.
+
+4. **Review the Log File**:
+   - Open the `terraform.log` file to review the captured logs:
+     ```bash
+     less terraform.log
+     ```
+   - Inside this file, you'll find all the detailed logs that would have appeared on your screen, including checks for available plugins, workspace details, configuration parsing, and more.
+
+#### Conclusion
+Enabling verbose logging with `TF_LOG` and redirecting logs using `TF_LOG_PATH` are powerful tools for debugging Terraform. These logs are particularly useful when you're troubleshooting complex issues or need to provide detailed information to HashiCorp support. 
