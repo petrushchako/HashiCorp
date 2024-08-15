@@ -1957,5 +1957,12 @@ In addition to displaying logs on your screen, Terraform allows you to redirect 
      ```
    - Inside this file, you'll find all the detailed logs that would have appeared on your screen, including checks for available plugins, workspace details, configuration parsing, and more.
 
+5. **Disable Logs**:
+   - Linux/Mac:
+     - `unset TF_LOG`
+   - Windows:
+     - `set TF_LOG=`
+
+
 #### Conclusion
 Enabling verbose logging with `TF_LOG` and redirecting logs using `TF_LOG_PATH` are powerful tools for debugging Terraform. These logs are particularly useful when you're troubleshooting complex issues or need to provide detailed information to HashiCorp support. 
