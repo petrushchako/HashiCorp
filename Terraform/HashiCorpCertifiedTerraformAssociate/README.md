@@ -1,5 +1,7 @@
 # HashiCorp Certified Terraform Associate
 
+> [Course link](https://app.pluralsight.com/ilx/hashicorp-certified-terraform-associate/course-overview)
+> 
 > [Terraform Exam Objectives Offical Review Page](https://developer.hashicorp.com/terraform/tutorials/certification-004/associate-review-004)
 
 
@@ -18,7 +20,7 @@
     - Terraform Init (Initializing the Working Directory)
     - Terraform Key Concepts: Plan, Apply, and Destroy
     - Resource Addressing in Terraform: Understanding Terraform Code
-    - Deploying a VM in AWS Using the Terraform Workflow
+    - `DEMO` Deploying a VM in AWS Using the Terraform Workflow
 
 4. Terraform Fundamentals
     - Installing Terraform and Terraform Providers
@@ -34,7 +36,7 @@
 6. Terraform Modules
     - Accessing and Using Terraform Modules
     - Interacting with Terraform Module Inputs and Outputs
-    - Building and Testing a Basic Terraform Module
+    - `DEMO` Building and Testing a Basic Terraform Module
 
 7. Built-in Functions and Dynamic Blocks
     - Terraform Built-in Functions
