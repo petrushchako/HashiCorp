@@ -4,6 +4,8 @@
   bacome: yes
 
   tasks:
+
+  # Option A
     - name: Update apt-get
       ansible.builtin.apt: 
         update_cache: yes
@@ -26,3 +28,9 @@
         name: "apache2"
         state: started
         enabled: yes
+
+
+  # Option B
+  # Script uses sudo that might require modification, or uses need to be added to sudoers with `NOPASSWD: ALL` authorization.
+    # - name: Run my script
+    #   ansible.builtin.script: ad-hoc-script.sh
