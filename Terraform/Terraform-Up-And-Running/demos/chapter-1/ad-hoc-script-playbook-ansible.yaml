@@ -1,0 +1,28 @@
+---
+- name: Setup Apache Server
+  hosts: all
+  bacome: yes
+
+  tasks:
+    - name: Update apt-get
+      ansible.builtin.apt: 
+        update_cache: yes
+
+    - name: Install PHP and Ansible
+      ansible.builtin.apt:
+        name: 
+          - php
+          - apache2
+        state: present
+
+    - name: Clone git repo
+      ansible.builtin.git: 
+        repo: "https://github.com/brikis98/php-app.git"
+        dest: "/var/www/html/app"
+        version: "master"
+
+    - name: Start Apache
+      ansible.builtin.service: 
+        name: "apache2"
+        state: started
+        enabled: yes
