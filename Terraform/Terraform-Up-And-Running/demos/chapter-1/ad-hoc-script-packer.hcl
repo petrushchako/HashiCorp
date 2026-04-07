@@ -1,0 +1,22 @@
+{
+    "builder": [{
+        "ami_name": "packer-example",
+        "instance_type": "t2.micro",
+        "region": "eu-west-1",
+        "type": "amazon-ebs",
+        "source_ami": "ami-0fb653ca2d3203ac1",
+        "ssh_user": "ubuntu"
+    }],
+    "provisioners": [{
+        "type": "shell",
+        "inline": [
+            "sudo apt-get udpate",
+            "sudo apt-get install -y php apache2",
+            "sudo git clone https://github.com/brikis98/php-app.git /var/www/html/app"
+        ],
+        "environement_vars": [
+            "DEBIAN_FRONTEND=noninteractive"
+        ],
+        "pause_before": "60s"
+    }]
+}
