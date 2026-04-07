@@ -1,6 +1,6 @@
 {
-    "builder": [{
-        "ami_name": "packer-example",
+    "builders": [{
+        "ami_name": "packer-example-{{timestamp}}",
         "instance_type": "t2.micro",
         "region": "eu-west-1",
         "type": "amazon-ebs",
@@ -10,11 +10,11 @@
     "provisioners": [{
         "type": "shell",
         "inline": [
-            "sudo apt-get udpate",
+            "sudo apt-get update",
             "sudo apt-get install -y php apache2",
             "sudo git clone https://github.com/brikis98/php-app.git /var/www/html/app"
         ],
-        "environement_vars": [
+        "environment_vars": [
             "DEBIAN_FRONTEND=noninteractive"
         ],
         "pause_before": "60s"
