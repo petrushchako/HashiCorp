@@ -9,10 +9,16 @@ resource "aws_instance" "my-first-vm" {
     vpc_security_group_ids = [aws_security_group.instance.id]
     user_data_replace_on_change = true
     user_data = <<-EOF
-                #!/bin/bash
-                echo "Hello from Terraform EC2" > index.html
-                nohup busybox httpd -f -p 8080 &
-                EOF
+              #!/bin/bash
+              # Create the directory and file
+              mkdir -p /home/ec2-user
+              cd /home/ec2-user
+              echo "Hello from Terraform EC2 via Python" > index.html
+              
+              # Run Python's built-in web server on port 8080
+              # Python 3 version:
+              nohup python3 -m http.server 8080 &
+              EOF
     tags = {
         Name = "terraform-example"
     }
