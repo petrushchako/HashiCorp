@@ -17,7 +17,7 @@ resource "aws_instance" "my-first-vm" {
               
               # Run Python's built-in web server on port 8080
               # Python 3 version:
-              nohup python3 -m http.server 8080 &
+              nohup python3 -m http.server ${var.server_port} &
               EOF
     tags = {
         Name = "terraform-example"
@@ -29,8 +29,8 @@ resource "aws_security_group" "instance" {
     name = "terraform-example-instance"
     # Incoming traffic
     ingress {
-        from_port   = 8080
-        to_port     = 8080
+        from_port   = var.server_port
+        to_port     = var.server_port
         protocol    = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
