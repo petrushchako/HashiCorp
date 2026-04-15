@@ -12,3 +12,32 @@
 | Packer | Ch 1 | [code/packer/01-why-terraform](https://github.com/brikis98/terraform-up-and-running-code/tree/master/code/packer/01-why-terraform) |
 | OPA | Ch 9 | [code/opa/09-testing-terraform-code](https://github.com/brikis98/terraform-up-and-running-code/tree/master/code/opa/09-testing-terraform-code) |
 | Go | Ch 9 | [code/terraform/09-testing-terraform-code/test](https://github.com/brikis98/terraform-up-and-running-code/tree/master/code/terraform/09-testing-terraform-code/test) |
+
+
+
+
+### Chapter 2
+
+#### Provider
+
+```hcl
+provider "aws" {
+    region = "eu-west-1"
+}
+```
+
+#### Resources syntax
+
+```hcl
+resource "<PROVIDER>_<TYPE>" "<NAME>" {
+    [CONFIG...]
+}
+```
+
+```hcl
+resource "aws_instance" "example" {
+    ami             = "ami-0ca708d12ecae12cb"
+    instance_type   = "t3.micro"
+}
+```
+
